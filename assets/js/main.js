@@ -63,4 +63,26 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Reveal on scroll animations
+  const revealEls = document.querySelectorAll('.reveal');
+  if (revealEls.length > 0 && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const delay = parseInt(el.getAttribute('data-reveal-delay') || '0', 10);
+          setTimeout(() => {
+            el.classList.add('in');
+          }, delay);
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    // Fallback: show immediately
+    revealEls.forEach(el => el.classList.add('in'));
+  }
 });

@@ -1,9 +1,9 @@
-/* Triquestra Solutions - Core Styles */
+/* Triquetra Solutions - Core Styles */
 
 :root {
-  --color-primary: #6d28d9; /* purple */
-  --color-accent: #06b6d4;  /* teal */
-  --color-primary-600: #5b21b6;
+  --color-primary: #2563eb; /* blue-600 */
+  --color-accent: #38bdf8;  /* sky-400 */
+  --color-primary-600: #1d4ed8; /* blue-700 */
   --color-text: #0f172a;    /* slate-900 */
   --color-muted: #475569;   /* slate-600 */
   --color-border: #e2e8f0;  /* slate-200 */
@@ -102,6 +102,21 @@ a {
   font-weight: 500;
   padding: 8px 10px;
   border-radius: 8px;
+  position: relative;
+  transition: color .2s ease;
+}
+
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 6px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .25s ease;
 }
 
 .nav a:hover {
@@ -109,10 +124,12 @@ a {
   background: #f8fafc;
 }
 
+.nav a:hover::after { transform: scaleX(1); }
+
 .nav a.active,
 .nav a[aria-current="page"] {
   color: var(--color-primary);
-  background: rgba(109, 40, 217, 0.08);
+  background: rgba(37, 99, 235, 0.08);
 }
 
 .nav-cta {
@@ -150,8 +167,11 @@ a {
 
 /* Hero */
 .hero {
-  background: radial-gradient(1200px 600px at 80% -10%, rgba(6,182,212,0.25), rgba(255,255,255,0)),
-              radial-gradient(1200px 600px at -10% 0%, rgba(109,40,217,0.25), rgba(255,255,255,0));
+  background: radial-gradient(1200px 600px at 80% -10%, rgba(56,189,248,0.28), rgba(255,255,255,0)),
+              radial-gradient(1200px 600px at -10% 0%, rgba(37,99,235,0.28), rgba(255,255,255,0));
+  background-size: 200% 200%;
+  background-position: 0% 50%;
+  animation: gradientShift 14s ease-in-out infinite alternate;
 }
 
 .hero-inner {
@@ -203,6 +223,7 @@ a {
   font-weight: 600;
   border: 1px solid transparent;
   cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, background .3s ease;
 }
 
 .btn-primary {
@@ -212,7 +233,7 @@ a {
 }
 
 .btn-primary:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
 
@@ -260,11 +281,12 @@ a {
   border-radius: var(--radius-lg);
   padding: 22px;
   box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+  transition: transform .3s ease, box-shadow .3s ease;
 }
 
 .card:hover {
   box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
+  transform: translateY(-4px);
 }
 
 .card h3 {
@@ -281,7 +303,7 @@ a {
   border-radius: 10px;
   display: inline-grid;
   place-items: center;
-  background: rgba(109,40,217,0.08);
+  background: rgba(37,99,235,0.08);
   color: var(--color-primary);
 }
 
@@ -290,7 +312,10 @@ a {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   overflow: hidden;
+  transition: transform .3s ease, box-shadow .3s ease;
 }
+
+.showcase:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
 
 .showcase img {
   width: 100%;
@@ -354,6 +379,13 @@ a {
   border-radius: 12px;
   padding: 12px 14px;
   font-size: 1rem;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.input:focus, .textarea:focus, .select:focus {
+  outline: none;
+  border-color: rgba(37,99,235,0.5);
+  box-shadow: 0 0 0 4px rgba(37,99,235,0.12);
 }
 
 .textarea { min-height: 140px; resize: vertical; }
@@ -388,6 +420,23 @@ a {
   font-size: 0.9rem;
   color: var(--color-muted);
 }
+
+/* Animations */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@keyframes floatY {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+.float { animation: floatY 6s ease-in-out infinite; }
+
+.reveal { opacity: 0; transform: translateY(10px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
 
 /* Responsive */
 @media (max-width: 960px) {

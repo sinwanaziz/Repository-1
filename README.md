@@ -1,6 +1,6 @@
-# Triquestra Solutions – Portfolio Website
+# Triquetra Solutions – Portfolio Website
 
-A modern, responsive, multi‑page static website for Triquestra Solutions.
+A modern, responsive, multi‑page static website for Triquetra Solutions.
 
 ## Quick start
 
@@ -39,4 +39,4 @@ Then visit `http://localhost:8000`.
 
 ## License
 
-© Triquestra Solutions. All rights reserved.
+© Triquetra Solutions. All rights reserved.
